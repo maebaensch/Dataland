@@ -23,7 +23,7 @@ import TabList from 'primevue/tablist';
 import TabPanel from 'primevue/tabpanel';
 import TabPanels from 'primevue/tabpanels';
 import Tabs from 'primevue/tabs';
-import { inject, onMounted, ref, type Ref, computed, watch } from 'vue';
+import { inject, onMounted, ref, type Ref, computed, watch, unref } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '@/router';
 import { ApiClientProvider } from '@/services/ApiClients.ts';
@@ -37,6 +37,7 @@ interface TabInfo {
 }
 
 const getKeycloakPromise = inject<() => Promise<Keycloak>>('getKeycloakPromise');
+const authenticated = inject<boolean | Ref<boolean>>('authenticated', false);
 const apiClientProvider = new ApiClientProvider(assertDefined(getKeycloakPromise)());
 const route = useRoute();
 
@@ -49,6 +50,7 @@ const tabs = ref<Array<TabInfo>>([
   { id: 'my-portfolios', label: 'MY PORTFOLIOS', route: '/portfolios', isVisible: true },
   { id: 'shared-portfolios', label: 'SHARED PORTFOLIOS', route: '/shared-portfolios', isVisible: false },
   { id: 'companies', label: 'COMPANIES', route: '/companies', isVisible: true },
+  { id: 'frameworks', label: 'FRAMEWORKS', route: '/frameworks', isVisible: true },
   { id: 'my-company', label: 'MY COMPANY', route: '/companies', isVisible: false },
   { id: 'my-datasets', label: 'MY DATASETS', route: '/datasets', isVisible: true },
   { id: 'qa', label: 'QA', route: '/qualityassurance', isVisible: false },
@@ -56,7 +58,11 @@ const tabs = ref<Array<TabInfo>>([
   { id: 'all-data-requests', label: 'ALL DATA REQUESTS', route: '/requestoverview', isVisible: false },
 ]);
 
-const visibleTabs = computed(() => tabs.value.filter((tab) => tab.isVisible || tab.id === currentTabId.value));
+const visibleTabs = computed(() =>
+  tabs.value.filter(
+    (tab) => (tab.id !== 'frameworks' || unref(authenticated)) && (tab.isVisible || tab.id === currentTabId.value)
+  )
+);
 
 const currentTabId = computed<TabInfo['id']>(() => {
   const myCompanyId = companyRoleAssignments.value?.[0]?.companyId;

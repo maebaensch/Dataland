@@ -24,6 +24,7 @@ function isTabVisible(textInTab: string, isTabExpectedToBeVisible: boolean): voi
 describe('Component tests for the tab used by logged-in users to switch pages', () => {
   enum AlwaysVisibleTabs {
     Companies = 'COMPANIES',
+    Frameworks = 'FRAMEWORKS',
     MyDatasets = 'MY DATASETS',
     MyPortfolios = 'MY PORTFOLIOS',
     MyDataRequests = 'MY DATA REQUESTS',

@@ -32,6 +32,33 @@ import KeycloakRedirect from '@/components/pages/KeycloakRedirect.vue';
 
 const routes = [
   {
+    path: '/frameworks',
+    name: 'Frameworks',
+    component: (): Promise<RouteComponent> => import('@/components/pages/FrameworksPage.vue'),
+    meta: { initialTabId: 'frameworks', requiresAuthentication: true },
+  },
+  {
+    path: '/frameworks/:frameworkId',
+    name: 'Framework documentation',
+    props: true,
+    component: (): Promise<RouteComponent> => import('@/components/pages/FrameworkDocumentationPage.vue'),
+    meta: { initialTabId: 'frameworks', requiresAuthentication: true },
+  },
+  {
+    path: '/frameworks/data-point-types/:dataPointId',
+    name: 'Data point documentation',
+    props: true,
+    component: (): Promise<RouteComponent> => import('@/components/pages/SpecificationDefinitionPage.vue'),
+    meta: { initialTabId: 'frameworks', requiresAuthentication: true },
+  },
+  {
+    path: '/frameworks/data-point-base-types/:baseTypeId',
+    name: 'Base type documentation',
+    props: true,
+    component: (): Promise<RouteComponent> => import('@/components/pages/SpecificationDefinitionPage.vue'),
+    meta: { initialTabId: 'frameworks', requiresAuthentication: true },
+  },
+  {
     path: '/companies/choose',
     name: 'Choose Company',
     component: ChooseCompanyForFrameworkDataUpload,

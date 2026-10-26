@@ -1,4 +1,12 @@
 <template>
+  <p v-if="typeof dataPointTypeId === 'string'">
+    <RouterLink
+      :to="{ name: 'Data point documentation', params: { dataPointId: dataPointTypeId } }"
+      target="_blank"
+      rel="noopener"
+      >View field documentation (opens in a new tab)</RouterLink
+    >
+  </p>
   <component ref="componentRef" :is="resolvedComponent" :extendedDataPointObject="extendedDataPointObject" />
   <Message v-if="errorMessage" severity="error" :life="3000">
     {{ errorMessage }}

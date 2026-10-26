@@ -3,6 +3,7 @@
     <AuthorizationWrapper :required-role="KEYCLOAK_ROLE_UPLOADER" :company-id="companyID" :data-type="frameworkType">
       <MarginWrapper>
         <CompanyInformation :companyId="companyID" />
+        <FrameworkDocumentationLink :frameworkId="frameworkType" />
       </MarginWrapper>
       <component :is="frameworkToUploadComponent" :companyID="companyID" @datasetCreated="redirectToMyDatasets()" />
     </AuthorizationWrapper>
@@ -11,6 +12,7 @@
 
 <script setup lang="ts">
 import CreateEuTaxonomyForFinancials from '@/components/forms/CreateEuTaxonomyFinancials.vue';
+import FrameworkDocumentationLink from '@/components/resources/frameworkDocumentation/FrameworkDocumentationLink.vue';
 import CreateEuTaxonomyNonFinancials from '@/components/forms/CreateEuTaxonomyNonFinancials.vue';
 import CreateLksgDataset from '@/components/forms/CreateLksgDataset.vue';
 import CreateNuclearAndGasDataset from '@/components/forms/CreateNuclearAndGasDataset.vue';

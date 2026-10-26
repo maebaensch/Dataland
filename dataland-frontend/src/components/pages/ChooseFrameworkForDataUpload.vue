@@ -7,6 +7,10 @@
       <Card class="col-12 text-left page-wrapper-card">
         <template #title> New Dataset - Framework </template>
         <template #content>
+          <p>
+            Need help choosing a framework?
+            <RouterLink :to="{ name: 'Frameworks' }">Explore framework definitions and documentation.</RouterLink>
+          </p>
           <div class="uploadFormWrapper grid">
             <div id="euTaxonomyContainer" class="col-9 flex">
               <div id="euTaxonomyLabel" class="col-3 p-3">

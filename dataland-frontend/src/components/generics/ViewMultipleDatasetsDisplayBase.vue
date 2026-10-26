@@ -18,6 +18,7 @@
         <div class="grid">
           <div class="col-12 text-left">
             <h2 class="mb-0" data-test="frameworkDataTableTitle">{{ humanizeString(dataType) }}</h2>
+            <FrameworkDocumentationLink :frameworkId="dataType" />
           </div>
           <div v-if="nonSourceabilityInfoText" class="col-12 non-sourceability-reporting-year-info my-3">
             <span data-test="nonSourceabilityReportingYearInfo">{{ nonSourceabilityInfoText }}</span>
@@ -63,6 +64,7 @@
 
 <script lang="ts">
 import ViewFrameworkBase from '@/components/generics/ViewFrameworkBase.vue';
+import FrameworkDocumentationLink from '@/components/resources/frameworkDocumentation/FrameworkDocumentationLink.vue';
 import { computed, defineComponent, inject, type PropType } from 'vue';
 import { type BasicDataDimensions, type DataMetaInformation, type DataTypeEnum, QaStatus } from '@clients/backend';
 import { humanizeStringOrNumber } from '@/utils/StringFormatter';
@@ -99,6 +101,7 @@ export default defineComponent({
     },
   },
   components: {
+    FrameworkDocumentationLink,
     MultiLayerDataTableFrameworkPanel,
     DatasetDisplayStatusIndicator,
     ViewFrameworkBase,
